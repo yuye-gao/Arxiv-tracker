@@ -1,16 +1,12 @@
 categories: ["cs.CV", "cs.LG", "cs.AI"]
 keywords:
-  - "open vocabulary"
-  - "open-vocabulary"
   - "open vocabulary segmentation"
-  - "open-vocabulary segmentation"
-  - "vision language model"
-  - "training-free"
-  - "training free"
+  - "image quality assessment"
 
-# exclude_keywords: # 选择排除的关键词
-#   - "Large Language Model"
-#   - "LLM"
+
+exclude_keywords: # 选择排除的关键词
+  - "Large Language Model"
+  - "LLM"
   
 logic: "AND"                 # 组间逻辑：categories 与 keywords 间 AND/OR
 max_results: 30

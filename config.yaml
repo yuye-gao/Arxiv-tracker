@@ -21,7 +21,7 @@ sort_by: "lastUpdatedDate"  # 还可以是submittedDate 建议改成lastUpdatedD
 sort_order: "descending"
 
 # zh / en / both
-lang: "both"
+lang: "zh"
 
 # —— 摘要设置 ——
 # mode: none / heuristic / llm

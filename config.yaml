@@ -21,7 +21,7 @@ sort_by: "lastUpdatedDate"  # 还可以是submittedDate 建议改成lastUpdatedD
 sort_order: "descending"
 
 # zh / en / both
-lang: "zh"
+lang: "both"
 
 # —— 摘要设置 ——
 # mode: none / heuristic / llm
@@ -48,13 +48,13 @@ email:
 llm:
   provider: "openai-compatible"     # 兼容 OpenAI SDK 的服务
   # 硅基流动的版本
-  base_url: "https://api.siliconflow.cn"
-  model: "Qwen/Qwen2.5-7B-Instruct"
-  api_key_env: "OPENAI_COMPAT_API_KEY"
+  #base_url: "https://api.siliconflow.cn"
+  #model: "Qwen/Qwen2.5-7B-Instruct"
+  #api_key_env: "OPENAI_COMPAT_API_KEY"
   # Deepseek的版本
-  # base_url: "https://api.deepseek.com"
-  # model: "deepseek-chat"
-  # api_key_env: "DS_API_KEY"
+  base_url: "https://api.deepseek.com"
+  model: "deepseek-chat"
+  api_key_env: "OPENAI_COMPAT_API_KEY"
   
 
   system_prompt_en: |

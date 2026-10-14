@@ -1,0 +1,653 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>arXiv 论文速递</title><style>
+:root {
+  --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#667085; --border:#e5e7eb; --acc:#2563eb;
+}
+:root[data-theme="dark"] {
+  --bg:#0b0f17; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --border:#1f2937; --acc:#2563eb;
+}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.6;}
+.container{max-width:900px;margin:0 auto;padding:18px;}
+.header{display:flex;gap:10px;justify-content:space-between;align-items:center;margin:8px 0 16px;flex-wrap:wrap}
+h1{font-size:22px;margin:0}
+.badge{font-size:12px;color:#111827;background:var(--acc);padding:2px 8px;border-radius:999px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.title{font-weight:700;margin:0 0 6px 0;font-size:18px}
+.meta-line{color:var(--muted);font-size:13px;margin:2px 0}
+.links a{color:var(--acc);text-decoration:none;margin-right:12px}
+.detail{margin-top:10px;background:rgba(2,6,23,.03);border:1px solid var(--border);border-radius:10px;padding:8px 10px}
+summary{cursor:pointer;color:var(--acc)}
+.mono{white-space:pre-wrap;background:rgba(2,6,23,.03);border:1px solid var(--border);padding:10px;border-radius:10px}
+.row{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width: 860px) {
+  .row-2{grid-template-columns:1fr 1fr}
+}
+.footer{color:var(--muted);font-size:13px;margin:20px 0 10px}
+.hr{height:1px;background:var(--border);margin:14px 0}
+.history-list a{display:block;color:var(--acc);text-decoration:none;margin:4px 0}
+.controls{display:flex;gap:8px;align-items:center}
+.btn{border:1px solid var(--border);background:var(--card);padding:6px 10px;border-radius:10px;cursor:pointer;color:var(--text)}
+.btn:hover{border-color:var(--acc)}
+</style>
+<script>
+(function() {
+  const root = document.documentElement;
+  function apply(t) {
+    if (t==='dark') root.setAttribute('data-theme','dark');
+    else if (t==='light') root.removeAttribute('data-theme');
+    else {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        root.setAttribute('data-theme','dark');
+      else root.removeAttribute('data-theme');
+    }
+  }
+  let t = localStorage.getItem('theme') || 'light';
+  if (!['light','dark','auto'].includes(t)) t='light';
+  apply(t);
+  window.__toggleTheme = function() {
+    let cur = localStorage.getItem('theme') || 'light';
+    if (cur==='light') cur='dark';
+    else if (cur==='dark') cur='auto';
+    else cur='light';
+    localStorage.setItem('theme', cur);
+    apply(cur);
+    const el=document.getElementById('theme-label');
+    if(el) el.textContent = cur.toUpperCase();
+  }
+  window.__expandAll = function(open) {
+    document.querySelectorAll('details').forEach(d => d.open = !!open);
+  }
+})();
+</script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>arXiv 论文速递</h1>
+      <div style="display:flex;gap:10px;align-items:center">
+        
+<div class="controls">
+  <button class="btn" onclick="__toggleTheme()">Theme: <span id="theme-label" style="margin-left:6px">AUTO</span></button>
+  <button class="btn" onclick="__expandAll(true)">Expand All</button>
+  <button class="btn" onclick="__expandAll(false)">Collapse All</button>
+</div>
+
+        <span class="badge">2026-10-15 06:07</span>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div>Snapshot: 20261015_0607</div>
+    <div class="row"><div class="card">
+<div class="title">EgoExplorer: A Vision-Motion-Touch Observatory for Human Loco-Manipulation In Situ</div>
+<div class="meta-line">Authors: Yunsong Zhou, Xuekun Jiang, Haiqi Shen, Hangxu Liu, Chaojian Shi, Yujie Liu, Jingyuan Li, Haoran Yang, Jiafei Cao, Dongzhan Zhou, Dong Wang, Yao Mu, Chunhua Shen, Weinan Zhang</div>
+<div class="meta-line">First: 2026-10-13T17:59:55+00:00 · Latest: 2026-10-13T17:59:55+00:00</div>
+<div class="meta-line">Comments: Project page: internrobotics.github.io/egoexplorer.github.io/</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.18872v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.18872v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Learning humanoid loco-manipulation from human demonstrations rests on observing how locomotion, posture, and object interaction evolve together as tasks unfold. Scaling collection across diverse environments, in turn, favors lightweight, portable capture systems. Yet, existing datasets provide only partial views of this coordination. Thus, we introduce EgoExplorer, a 100-hour vision-motion-touch observatory of human loco-manipulation built with a wearable system. With an emphasis on professional activities, its continuous recordings align egocentric video with reconstructed whole-body motion, fine-grained finger articulation, and tactile observations, accompanied by step-level descriptions. To achieve this coverage with sparse body sensing, we develop the Calibrate-Complete-Constrain pipeline. Concretely, reusable calibration fixes participant geometry and sensor attachments before motion inference to disentangle mounting offsets from articulation. A temporal prior then completes unobserved joint motion, while layered constraints promote measurement agreement, temporal continuity, and geometric consistency, properties that motion plausibility alone does not guarantee. Against tracker-fitted references, the method reduces body-point error by 71.9% relative to the strongest baseline; matched evaluations also show gains in hand stability and contact estimation. Preliminary studies explore multimodal generation and conditioning alongside humanoid retargeting with whole-body control in simulation.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Learning humanoid loco-manipulation from human demonstrations rests on observing how locomotion, posture, and object interaction evolve together as tasks unfold.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">PLAYGROUND: Progressive Layout Generation with Render-Grounded Planning</div>
+<div class="meta-line">Authors: Jaeho Lee, Junhwan Heo, Junghyun Park, WonJun Moon, Eunju Yang, Seungho Jang, Seongchan Kim, Seungryong Kim</div>
+<div class="meta-line">First: 2026-10-13T17:59:50+00:00 · Latest: 2026-10-13T17:59:50+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.18865v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.18865v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Generating editable graphic designs requires arranging visual and textual elements into a coherent composition while preserving their content and editability. Although recent MLLM-based approaches employ iterative generation and visual refinement to reflect the real-world design workflows, their high-level plans are predetermined prior to execution, limiting their adaptability as the design evolves. To address this limitation, we propose PlayGround, a progressive layout generation framework that dynamically adapts to the current rendered canvas. PlayGround establishes a progressive design loop comprising a Progressive Planner, a Layout Generator, and a Visual Verifier, guided by a Structure-Aware Retriever. Given an initial set of unordered elements, the Structure-Aware Retriever initially infers a coarse layout structure to retrieve structurally similar reference designs. Subsequently, at each turn, the Progressive Planner examines the current rendered canvas alongside the remaining elements, forms the next functional group, and plans its composition. The Layout Generator then predicts editable layout attributes, while the Visual Verifier evaluates rendered candidates and provides feedback when refinement is necessary. To train the Progressive Planner with step-wise supervision, we construct a two-stage data generation pipeline that extracts functional groups and turn-level planning trajectories from completed designs. Experiments on Crello and LICA demonstrate the effectiveness of PlayGround over existing methods. Our code and weights will be publicly released.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Generating editable graphic designs requires arranging visual and textual elements into a coherent composition while preserving their content and editability.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Data Free Training of Diffusion Models for Lattice Field Theories</div>
+<div class="meta-line">Authors: Dennis Grinwald, Ankur Singha, Khaled Kahouli, Karl Jansen, Shinichi Nakajima</div>
+<div class="meta-line">First: 2026-10-13T17:59:33+00:00 · Latest: 2026-10-13T17:59:33+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.18863v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.18863v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Sampling equilibrium field configurations remains a major computational bottleneck in lattice field theory, motivating the development of generative samplers that can produce independent configurations. Diffusion models are promising for this purpose, but their standard denoising score matching objective requires samples from the target distribution, seemingly reintroducing the original sampling problem. Here, we show that diffusion models can instead be trained from their own generated samples using the target score identity, provided access to the unnormalized probability density. Importance-weighted formulations of this identity yield a consistent target throughout training, while unweighted variants define a self-consistent fixed-point training scheme. We benchmark the different approaches in two-dimensional \(φ^4\) theory and identify effective choices that enable efficient training and sampling across the symmetric, critical, and broken phases. Ultimately, our data-free training approach achieves comparable performance to training on HMC reference data.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Sampling equilibrium field configurations remains a major computational bottleneck in lattice field theory, motivating the development of generative samplers that can produce independent configurations.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">AesCode: Aesthetic Code Generation with Decoupled Cross-Modal Rewards</div>
+<div class="meta-line">Authors: Xin Gao, Yifan Yang, Xin Li, Pan Wang, Yan Li, Muzhao Tian, Mingxi Cheng, Bei Liu, Kai Qiu, Qi Dai, Dong Chen, Yue Dong, Leandros Tassiulas, Rex Ying, Ji Li, Chong Luo</div>
+<div class="meta-line">First: 2026-10-13T17:59:31+00:00 · Latest: 2026-10-13T17:59:31+00:00</div>
+<div class="meta-line">Comments: 44 pages,18 figures</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.18860v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.18860v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Generating information-rich visual artifacts such as slides, posters, and dashboards as code is appealing because the outputs are structured, editable, and verifiable. Yet code models cannot see how their choices of layout and color come together on the canvas, often limiting spatial planning and aesthetic quality. Image generators excel at visual design but can misrender requested content, making their outputs unreliable targets for direct reproduction. We therefore introduce AesCode, which generates code grounded in the content prompt while using an image generated from the same prompt as an aesthetic guidance. To do so, AesCode represents the target as a design graph that describes the whole canvas and makes each property attributable. From this graph, we derive complementary cross-modal rewards: deterministic verifiers score properties parsable from code and rendering, while a VLM judge assesses the non-parsable ones with a sample-specific Visual Graph Rubric (VGR) tied to graph elements and relations. We optimize these decoupled rewards through reinforcement learning with per-channel normalization to jointly improve spatial planning, aesthetic quality, and verifiable correctness. To evaluate this setting, we build a benchmark that scores verifiable correctness and visual quality separately, with visual scores highly consistent with human judgments. We find that reference images substantially improve the visual quality of code generated by existing models, and ablations show that AesCode benefits from references both as model input and as a source of visual rewards. Relative to same-scale Qwen3-VL baselines given the same references, AesCode-8B and AesCode-32B improve visual quality by 31.1 and 22.4 percentage points, reaching scores comparable to those of closed-source frontier models such as GPT-5.5 and Claude Opus 4.8.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Generating information-rich visual artifacts such as slides, posters, and dashboards as code is appealing because the outputs are structured, editable, and verifiable.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Enabling Token-wise Importance Sampling in Off-Policy RLVR with Proximal KL Regularization</div>
+<div class="meta-line">Authors: Hao Bai, Jiarui Yao, Tong Zhang</div>
+<div class="meta-line">First: 2026-10-13T17:09:23+00:00 · Latest: 2026-10-13T17:09:23+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.18738v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.18738v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Off-policy data in reinforcement learning with verifiable rewards (RLVR) can arise from asynchronous generation, rollout-training mismatch, and response reuse. Token-wise importance weighting avoids multiplying likelihood ratios across a response but generally biases policy gradients. We prove that, under coverage and local expressiveness conditions, full future KL credit makes the exact proximal optimizer the update&#x27;s unique stationary policy, even for mixtures of older policies, without full-response weights or a fitted critic. We further establish convergence of continuous-time tabular population updates under persistent coverage and time-varying behavior policies, and a finite-sample reward guarantee for linear logistic models under additional assumptions. These results motivate Proximal KL, a practical off-policy RLVR method that separates the proximal reference from the sampling policy and replaces PPO clipping with bounded future KL credit. Across all seven matched off-policy comparisons on Qwen3-1.7B and Qwen3-4B, spanning two learning rates, response reuse, and rollout staleness, Proximal KL outperforms GRPO in micro-averaged accuracy over eight math benchmarks by up to 2.58%. A separate on-policy comparison yields comparable aggregate accuracy. In periodic-refresh experiments, Proximal KL avoids the collapses observed in PG and CISPO, exceeds GRPO&#x27;s training accuracy, and reaches higher accuracy in fewer policy updates. Ablations show that token-wise correction outperforms sequence-level and unweighted controls. With token-wise correction retained, future KL feedback reduces sensitivity to the tested baseline perturbation relative to PPO clipping. A finite future horizon improves AIME24 mean@16 and pass@16 over the full tail, while fixed-policy measurements show that truncation reduces correction variance over the tested horizons.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Off-policy data in reinforcement learning with verifiable rewards (RLVR) can arise from asynchronous generation, rollout-training mismatch, and response reuse.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">DualOPSD: Closing the Feedback Loop in On-Policy Self-Distillation</div>
+<div class="meta-line">Authors: Yutong Chen, Guangfu Guo, Zhichao Xu, Kunpeng Liu</div>
+<div class="meta-line">First: 2026-08-26T17:01:21+00:00 · Latest: 2026-10-13T17:08:56+00:00</div>
+<div class="meta-line">Comments: preprint</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2608.26019v2">Abs</a> · <a href="https://arxiv.org/pdf/2608.26019v2">PDF</a> · <a href="https://github.com/on1262/DualOPSD">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">On-policy self-distillation (OPSD) combines student generated trajectories with dense supervision from a privileged teacher of the same model. Its pointwise clipping protects the student from locally incompatible teacher directions, but the fixed teacher receives no feedback about the supervision the student rejects, which limits effective learning from the teacher. We introduce DualOPSD, which alternates updates in a coupled teacher-student system. The student retains OPSD&#x27;s clipped forward KL objective. The privileged teacher adapts to the updated student after each student step. A residual target based on the frozen initial model preserves the effect of privileged context during teacher adaptation. Across Qwen3-8B/4B/1.7B and three math benchmarks, DualOPSD improves avg@12 accuracy over OPSD by 9.83 percentage points. Further diagnostic analyses show lower bidirectional KL, less persistent mismatch, and retained sensitivity to privileged reference. Together, these results demonstrate that DualOPSD can be a more effective form of privileged self-distillation. Code is available at: https://github.com/on1262/DualOPSD.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">On-policy self-distillation (OPSD) combines student generated trajectories with dense supervision from a privileged teacher of the same model.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">GAE: Learning a Geometry-Native Latent Space for 3D-Consistent World Generation</div>
+<div class="meta-line">Authors: Jiahao Lu, Minghao Yin, Wenbo Hu, Hengyu Liu, Wang Zhao, Sai-Kit Yeung, Ying Shan, Yuan Liu</div>
+<div class="meta-line">First: 2026-09-21T17:56:25+00:00 · Latest: 2026-10-13T17:07:02+00:00</div>
+<div class="meta-line">Comments: Project page: https://jiah-cloud.github.io/GAE.github.io/ Github: https://github.com/TencentARC/GAE-GeometricAutoEncoder</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2609.24981v3">Abs</a> · <a href="https://arxiv.org/pdf/2609.24981v3">PDF</a> · <a href="https://github.com/TencentARC/GAE-GeometricAutoEncoder">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a> · <a href="https://jiah-cloud.github.io/GAE.github.io/">Project1</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">We present a compact geometry-native latent space as a shared foundation for perception and generation. Visual generators can produce photorealistic frames without preserving a consistent 3D scene. We argue that this is not only a modeling problem but also a representation problem: generators typically evolve appearance-centric latents, while perception models recover geometry in a semantically rich space that encodes cross-view structure. Rather than adding geometry as another output, we reparameterize a geometry foundation model&#x27;s features into a compact latent space for generation. We realize this shift with the geometry-native autoencoder (GAE), whose latent is jointly decodable to appearance, depth, cameras, and point maps. With this state, a standard conditional flow supports diverse generation tasks. In controlled comparisons that hold the generator and training protocol fixed, replacing the latent with GAE improves both visual quality and independently measured 3D coherence: FVD falls by $12.7\%$ and $23.1\%$ on RealEstate10K and DL3DV, and camera-trajectory error is halved on RealEstate10K. Together, these results show that the latent space is central to geometry-consistent generation and can serve as a shared interface between perception and generation.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">We present a compact geometry-native latent space as a shared foundation for perception and generation.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Learning Source Structure: Bayesian Prediction with Transformers</div>
+<div class="meta-line">Authors: Meir Feder, Ruediger Urbanke</div>
+<div class="meta-line">First: 2026-10-13T17:05:05+00:00 · Latest: 2026-10-13T17:05:05+00:00</div>
+<div class="meta-line">Comments: 45 pages, 12 figures. 9 pages of main text. Code at https://github.com/urbanke/learning-source-structure</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.18725v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.18725v1">PDF</a> · <a href="https://github.com/urbanke/learning-source-structure">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">A transformer trained on sequences whose source parameters are drawn afresh each time can learn only what the sequences share: the source family and its prior. The Bayesian predictor that knows both, which we call informed Bayes, is the unique minimizer of the training loss and is computable from the family alone; we use it as a quantitative, falsifiable reference. Where earlier work compared transformers with Bayes on sources whose contexts can be learned independently, we build Markov sources with up to 64 symbols in which observations in one context inform prediction in another: product sources with known or hidden encodings, transition rows sharing an unknown base law and depth, and a mixture of three families. Our main result is that informed Bayes predicts, from the family and prior alone, how a trained transformer behaves in four tests that go beyond the learning curve: the loss that remains under a source outside the training family (predicted 2.237 bits, measured 2.309), the doubling of the extra loss when two independent components change rather than one (0.345 predicted, 0.350 measured), the benefit of other contexts when a token appears for the first time, and the depth at which copying an earlier continuation starts to pay. On the learning curves themselves, small transformers match informed Bayes when the shared structure is visible in the tokens, and hidden structure needs more layers and training, with gaps below 0.01 bits per token for the largest models. We explain why the imitation is possible and where it must fail: informed Bayes decomposes into sufficient statistics that attention selects and accumulates and an estimator, fixed by the prior, that the feed-forward network learns; training pays the complexity of informed Bayes under the architecture&#x27;s prior, and finite-memory universal prediction bounds how closely a bounded network can reach it.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">A transformer trained on sequences whose source parameters are drawn afresh each time can learn only what the sequences share: the source family and its prior.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Composition without a Host: Carrying the Spatiotemporal-Composability Guarantee of Plugin-Based Agents across Processes</div>
+<div class="meta-line">Authors: Hanzhang Jia, Liheng Zeng, Hao Cheng, Yi Gao, Bo Ma, Guolong Xu</div>
+<div class="meta-line">First: 2026-08-28T17:30:10+00:00 · Latest: 2026-10-13T16:44:41+00:00</div>
+<div class="meta-line">Comments: Still just draft, version 0.4.1. The author contributions are still under discussion, and the draft doesn&#x27;t represent the final decision</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2608.28553v4">Abs</a> · <a href="https://arxiv.org/pdf/2608.28553v4">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Plugin-based agents assemble capabilities at runtime, and the spatiotemporal-composability calculus proves a reversibility guarantee for this assembly. However, the guarantee is carried by a single process, which confines all components, sessions, and recovery records to one failure domain, where a fault spreads past the plugin boundary, and process death interrupts every session the process hosts. Resting only on the hypotheses the calculus already states and the stateless interface of the model call, this paper relaxes the single-process restriction of the calculus to an arbitrary assignment of components and records to processes, gives four sufficient conditions, and proves with Theorem 1, derived from the four lemmas, that the reversibility guarantee holds across processes when these conditions are met. Based on Theorem 1, this paper constructs Logos, a cross-process plugin-based agent in the peer-process and name-routed form of ROS, where a plugin is a process, the router holds only a rebuildable routing table, and the session state needed for recovery lives in an append-only transcript owned by no process. Under one fault on two hundred benchmark tasks across three configurations, the single-process reference lost every session and scored 1.5 percent on the official validator, the MCP configuration kept its sessions while spending 1099 calls on a dead endpoint, and Logos kept every session alive, wasted zero calls, and succeeded on 120 tasks against 102 for both configurations combined. At the mechanism level, eighty sessions terminated at four points of the tool-call cycle all resumed with no repeated action, 3,500 concurrent calls paired with zero violations, and one bus hop cost 1 in 823 of the model&#x27;s first token. The results show that the reversibility guarantee holds across processes and that assembly itself can leave the host process.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Plugin-based agents assemble capabilities at runtime, and the spatiotemporal-composability calculus proves a reversibility guarantee for this assembly.</div>
+</details>
+</div>
+<div class="card">
+<div class="title">RSIgen: Reciprocal Self-Improvement for Agentic Visual Generation</div>
+<div class="meta-line">Authors: Yidi Liu, Haozhe Wang, Jie Xiao, Kai Zhu, Xueyang Fu, Zheng-Jun Zha</div>
+<div class="meta-line">First: 2026-10-13T16:41:24+00:00 · Latest: 2026-10-13T16:41:24+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.18688v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.18688v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Agentic visual generation produces experience that can improve the native understanding (agent) and generation roles of a unified multimodal backbone, but task success alone does not determine which role should learn. Generator updates can also make the agent&#x27;s action supervision stale. We introduce RSIgen, a task-centric reciprocal self-improvement framework linking learning allocation, supervision refresh, and recursive curriculum construction. Dynamic Responsibility Routing (DRR) uses matched interventions on evidence, inputs, and supported actions to select learning recipients and construct compatible training targets. After generator learning, RSIgen re-evaluates the relative utility of tested actions with branch inputs held fixed to refresh agent supervision; the retained roles then construct the next curriculum. Across BAGEL, Qwen-Image, and Wan-Image-7B, RSIgen improves AgentGen-Bench Full Overall9 by 3.2--3.3 points over a three-cycle SearchGen adaptation with action costs. Wan controls support allocation gains at matched role-level training exposure, refresh gains at a matched adaptation budget, and benefits from updated curriculum sources while recipients continue learning. In blind evaluation on 200 real-user requests, pooled tie-adjusted preference scores against the same baseline reach 70.0% for task completion and 64.9% for visual quality.</div></details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">Agentic visual generation produces experience that can improve the native understanding (agent) and generation roles of a unified multimodal backbone, but task success alone does not determine which role should learn.</div>
+</details>
+</div></div>
+    <details style="margin-top:16px" class="detail"><summary>History</summary>
+      <div class="history-list"><a href="archive/20261014_0713.html">20261014_0713</a>
+<a href="archive/20261013_0909.html">20261013_0909</a>
+<a href="archive/20261012_0643.html">20261012_0643</a>
+<a href="archive/20261011_0617.html">20261011_0617</a>
+<a href="archive/20261010_0705.html">20261010_0705</a>
+<a href="archive/20261009_0741.html">20261009_0741</a>
+<a href="archive/20261008_0730.html">20261008_0730</a>
+<a href="archive/20261007_0656.html">20261007_0656</a>
+<a href="archive/20261006_0839.html">20261006_0839</a>
+<a href="archive/20261005_0614.html">20261005_0614</a>
+<a href="archive/20261004_0602.html">20261004_0602</a>
+<a href="archive/20261003_0656.html">20261003_0656</a>
+<a href="archive/20261002_0702.html">20261002_0702</a>
+<a href="archive/20261001_0651.html">20261001_0651</a>
+<a href="archive/20260930_0653.html">20260930_0653</a>
+<a href="archive/20260929_0746.html">20260929_0746</a>
+<a href="archive/20260928_0554.html">20260928_0554</a>
+<a href="archive/20260927_0554.html">20260927_0554</a>
+<a href="archive/20260926_0603.html">20260926_0603</a>
+<a href="archive/20260925_0605.html">20260925_0605</a>
+<a href="archive/20260924_0607.html">20260924_0607</a>
+<a href="archive/20260923_0551.html">20260923_0551</a>
+<a href="archive/20260922_0630.html">20260922_0630</a>
+<a href="archive/20260921_0515.html">20260921_0515</a>
+<a href="archive/20260920_0521.html">20260920_0521</a>
+<a href="archive/20260919_0529.html">20260919_0529</a>
+<a href="archive/20260918_0557.html">20260918_0557</a>
+<a href="archive/20260917_0557.html">20260917_0557</a>
+<a href="archive/20260916_0557.html">20260916_0557</a>
+<a href="archive/20260915_0624.html">20260915_0624</a>
+<a href="archive/20260913_0518.html">20260913_0518</a>
+<a href="archive/20260912_0535.html">20260912_0535</a>
+<a href="archive/20260911_0529.html">20260911_0529</a>
+<a href="archive/20260910_0532.html">20260910_0532</a>
+<a href="archive/20260909_0540.html">20260909_0540</a>
+<a href="archive/20260908_0556.html">20260908_0556</a>
+<a href="archive/20260907_0508.html">20260907_0508</a>
+<a href="archive/20260906_0500.html">20260906_0500</a>
+<a href="archive/20260905_0518.html">20260905_0518</a>
+<a href="archive/20260904_0536.html">20260904_0536</a>
+<a href="archive/20260903_0538.html">20260903_0538</a>
+<a href="archive/20260902_0539.html">20260902_0539</a>
+<a href="archive/20260901_0709.html">20260901_0709</a>
+<a href="archive/20260831_0552.html">20260831_0552</a>
+<a href="archive/20260830_0533.html">20260830_0533</a>
+<a href="archive/20260829_1001.html">20260829_1001</a>
+<a href="archive/20260828_1027.html">20260828_1027</a>
+<a href="archive/20260827_0543.html">20260827_0543</a>
+<a href="archive/20260826_0333.html">20260826_0333</a>
+<a href="archive/20260825_0331.html">20260825_0331</a>
+<a href="archive/20260824_0323.html">20260824_0323</a>
+<a href="archive/20260823_0324.html">20260823_0324</a>
+<a href="archive/20260822_0327.html">20260822_0327</a>
+<a href="archive/20260821_0333.html">20260821_0333</a>
+<a href="archive/20260820_0328.html">20260820_0328</a>
+<a href="archive/20260819_0332.html">20260819_0332</a>
+<a href="archive/20260818_0330.html">20260818_0330</a>
+<a href="archive/20260817_0322.html">20260817_0322</a>
+<a href="archive/20260816_0322.html">20260816_0322</a>
+<a href="archive/20260815_0350.html">20260815_0350</a>
+<a href="archive/20260814_0356.html">20260814_0356</a>
+<a href="archive/20260813_0401.html">20260813_0401</a>
+<a href="archive/20260812_0404.html">20260812_0404</a>
+<a href="archive/20260811_0356.html">20260811_0356</a>
+<a href="archive/20260810_0335.html">20260810_0335</a>
+<a href="archive/20260809_0333.html">20260809_0333</a>
+<a href="archive/20260808_0353.html">20260808_0353</a>
+<a href="archive/20260807_0841.html">20260807_0841</a>
+<a href="archive/20260806_0428.html">20260806_0428</a>
+<a href="archive/20260805_0427.html">20260805_0427</a>
+<a href="archive/20260804_0428.html">20260804_0428</a>
+<a href="archive/20260802_0411.html">20260802_0411</a>
+<a href="archive/20260801_0421.html">20260801_0421</a>
+<a href="archive/20260731_0416.html">20260731_0416</a>
+<a href="archive/20260730_0413.html">20260730_0413</a>
+<a href="archive/20260729_0417.html">20260729_0417</a>
+<a href="archive/20260728_0424.html">20260728_0424</a>
+<a href="archive/20260727_0411.html">20260727_0411</a>
+<a href="archive/20260726_0412.html">20260726_0412</a>
+<a href="archive/20260725_0422.html">20260725_0422</a>
+<a href="archive/20260724_0415.html">20260724_0415</a>
+<a href="archive/20260723_0414.html">20260723_0414</a>
+<a href="archive/20260722_0420.html">20260722_0420</a>
+<a href="archive/20260721_0423.html">20260721_0423</a>
+<a href="archive/20260720_0408.html">20260720_0408</a>
+<a href="archive/20260719_0405.html">20260719_0405</a>
+<a href="archive/20260718_0407.html">20260718_0407</a>
+<a href="archive/20260717_0404.html">20260717_0404</a>
+<a href="archive/20260716_0412.html">20260716_0412</a>
+<a href="archive/20260715_0414.html">20260715_0414</a>
+<a href="archive/20260714_0417.html">20260714_0417</a>
+<a href="archive/20260713_0407.html">20260713_0407</a>
+<a href="archive/20260712_0406.html">20260712_0406</a>
+<a href="archive/20260711_0425.html">20260711_0425</a>
+<a href="archive/20260710_0448.html">20260710_0448</a>
+<a href="archive/20260709_0422.html">20260709_0422</a>
+<a href="archive/20260707_0453.html">20260707_0453</a>
+<a href="archive/20260706_0416.html">20260706_0416</a>
+<a href="archive/20260705_0411.html">20260705_0411</a>
+<a href="archive/20260704_0416.html">20260704_0416</a>
+<a href="archive/20260703_0420.html">20260703_0420</a>
+<a href="archive/20260702_0448.html">20260702_0448</a>
+<a href="archive/20260701_0458.html">20260701_0458</a>
+<a href="archive/20260630_0450.html">20260630_0450</a>
+<a href="archive/20260629_0415.html">20260629_0415</a>
+<a href="archive/20260627_0449.html">20260627_0449</a>
+<a href="archive/20260626_0500.html">20260626_0500</a>
+<a href="archive/20260625_0450.html">20260625_0450</a>
+<a href="archive/20260624_0505.html">20260624_0505</a>
+<a href="archive/20260622_0426.html">20260622_0426</a>
+<a href="archive/20260621_0417.html">20260621_0417</a>
+<a href="archive/20260620_0427.html">20260620_0427</a>
+<a href="archive/20260619_0525.html">20260619_0525</a>
+<a href="archive/20260618_0510.html">20260618_0510</a>
+<a href="archive/20260617_0543.html">20260617_0543</a>
+<a href="archive/20260616_0545.html">20260616_0545</a>
+<a href="archive/20260615_0420.html">20260615_0420</a>
+<a href="archive/20260614_0419.html">20260614_0419</a>
+<a href="archive/20260613_0505.html">20260613_0505</a>
+<a href="archive/20260612_0525.html">20260612_0525</a>
+<a href="archive/20260611_0528.html">20260611_0528</a>
+<a href="archive/20260610_0502.html">20260610_0502</a>
+<a href="archive/20260609_0513.html">20260609_0513</a>
+<a href="archive/20260608_0416.html">20260608_0416</a>
+<a href="archive/20260606_0450.html">20260606_0450</a>
+<a href="archive/20260604_0553.html">20260604_0553</a>
+<a href="archive/20260603_0552.html">20260603_0552</a>
+<a href="archive/20260602_0613.html">20260602_0613</a>
+<a href="archive/20260601_0414.html">20260601_0414</a>
+<a href="archive/20260531_0412.html">20260531_0412</a>
+<a href="archive/20260530_0512.html">20260530_0512</a>
+<a href="archive/20260528_0504.html">20260528_0504</a>
+<a href="archive/20260527_0458.html">20260527_0458</a>
+<a href="archive/20260526_0425.html">20260526_0425</a>
+<a href="archive/20260524_0409.html">20260524_0409</a>
+<a href="archive/20260523_0445.html">20260523_0445</a>
+<a href="archive/20260522_0454.html">20260522_0454</a>
+<a href="archive/20260520_0448.html">20260520_0448</a>
+<a href="archive/20260519_0428.html">20260519_0428</a>
+<a href="archive/20260518_0407.html">20260518_0407</a>
+<a href="archive/20260517_0404.html">20260517_0404</a>
+<a href="archive/20260516_0420.html">20260516_0420</a>
+<a href="archive/20260515_0440.html">20260515_0440</a>
+<a href="archive/20260514_0449.html">20260514_0449</a>
+<a href="archive/20260513_0445.html">20260513_0445</a>
+<a href="archive/20260512_0450.html">20260512_0450</a>
+<a href="archive/20260511_0402.html">20260511_0402</a>
+<a href="archive/20260510_0401.html">20260510_0401</a>
+<a href="archive/20260509_0410.html">20260509_0410</a>
+<a href="archive/20260508_0420.html">20260508_0420</a>
+<a href="archive/20260507_0427.html">20260507_0427</a>
+<a href="archive/20260506_0412.html">20260506_0412</a>
+<a href="archive/20260504_0358.html">20260504_0358</a>
+<a href="archive/20260503_0357.html">20260503_0357</a>
+<a href="archive/20260502_0408.html">20260502_0408</a>
+<a href="archive/20260501_0412.html">20260501_0412</a>
+<a href="archive/20260430_1741.html">20260430_1741</a>
+<a href="archive/20260430_1720.html">20260430_1720</a>
+<a href="archive/20260430_1648.html">20260430_1648</a>
+<a href="archive/20260430_0412.html">20260430_0412</a>
+<a href="archive/20260429_1703.html">20260429_1703</a>
+<a href="archive/20260429_1657.html">20260429_1657</a>
+<a href="archive/20260429_1642.html">20260429_1642</a>
+<a href="archive/20260428_0429.html">20260428_0429</a>
+<a href="archive/20260427_0405.html">20260427_0405</a>
+<a href="archive/20260426_0404.html">20260426_0404</a>
+<a href="archive/20260425_0410.html">20260425_0410</a>
+<a href="archive/20260424_0430.html">20260424_0430</a>
+<a href="archive/20260423_0426.html">20260423_0426</a>
+<a href="archive/20260422_0424.html">20260422_0424</a>
+<a href="archive/20260421_0418.html">20260421_0418</a>
+<a href="archive/20260420_0359.html">20260420_0359</a>
+<a href="archive/20260419_0358.html">20260419_0358</a>
+<a href="archive/20260418_0415.html">20260418_0415</a>
+<a href="archive/20260417_0421.html">20260417_0421</a>
+<a href="archive/20260416_0425.html">20260416_0425</a>
+<a href="archive/20260415_0426.html">20260415_0426</a>
+<a href="archive/20260414_0423.html">20260414_0423</a>
+<a href="archive/20260413_0352.html">20260413_0352</a>
+<a href="archive/20260412_0347.html">20260412_0347</a>
+<a href="archive/20260411_0356.html">20260411_0356</a>
+<a href="archive/20260410_0412.html">20260410_0412</a>
+<a href="archive/20260409_0411.html">20260409_0411</a>
+<a href="archive/20260407_0404.html">20260407_0404</a>
+<a href="archive/20260406_0347.html">20260406_0347</a>
+<a href="archive/20260405_0344.html">20260405_0344</a>
+<a href="archive/20260404_0350.html">20260404_0350</a>
+<a href="archive/20260403_0400.html">20260403_0400</a>
+<a href="archive/20260401_0408.html">20260401_0408</a>
+<a href="archive/20260331_0407.html">20260331_0407</a>
+<a href="archive/20260329_0347.html">20260329_0347</a>
+<a href="archive/20260328_0350.html">20260328_0350</a>
+<a href="archive/20260326_0357.html">20260326_0357</a>
+<a href="archive/20260325_0405.html">20260325_0405</a>
+<a href="archive/20260324_0400.html">20260324_0400</a>
+<a href="archive/20260323_0342.html">20260323_0342</a>
+<a href="archive/20260322_0340.html">20260322_0340</a>
+<a href="archive/20260321_0347.html">20260321_0347</a>
+<a href="archive/20260320_0356.html">20260320_0356</a>
+<a href="archive/20260319_0358.html">20260319_0358</a>
+<a href="archive/20260318_0405.html">20260318_0405</a>
+<a href="archive/20260317_0401.html">20260317_0401</a>
+<a href="archive/20260316_0343.html">20260316_0343</a>
+<a href="archive/20260315_0341.html">20260315_0341</a>
+<a href="archive/20260314_0344.html">20260314_0344</a>
+<a href="archive/20260313_0352.html">20260313_0352</a>
+<a href="archive/20260312_0352.html">20260312_0352</a>
+<a href="archive/20260311_0347.html">20260311_0347</a>
+<a href="archive/20260310_0350.html">20260310_0350</a>
+<a href="archive/20260309_0338.html">20260309_0338</a>
+<a href="archive/20260308_0337.html">20260308_0337</a>
+<a href="archive/20260307_0347.html">20260307_0347</a>
+<a href="archive/20260306_0402.html">20260306_0402</a>
+<a href="archive/20260305_0348.html">20260305_0348</a>
+<a href="archive/20260304_0348.html">20260304_0348</a>
+<a href="archive/20260303_0348.html">20260303_0348</a>
+<a href="archive/20260302_0336.html">20260302_0336</a>
+<a href="archive/20260301_0339.html">20260301_0339</a>
+<a href="archive/20260228_0348.html">20260228_0348</a>
+<a href="archive/20260227_0354.html">20260227_0354</a>
+<a href="archive/20260226_0402.html">20260226_0402</a>
+<a href="archive/20260225_0404.html">20260225_0404</a>
+<a href="archive/20260224_0406.html">20260224_0406</a>
+<a href="archive/20260223_0338.html">20260223_0338</a>
+<a href="archive/20260222_0339.html">20260222_0339</a>
+<a href="archive/20260221_0345.html">20260221_0345</a>
+<a href="archive/20260220_0348.html">20260220_0348</a>
+<a href="archive/20260219_0358.html">20260219_0358</a>
+<a href="archive/20260218_0358.html">20260218_0358</a>
+<a href="archive/20260217_0343.html">20260217_0343</a>
+<a href="archive/20260216_0339.html">20260216_0339</a>
+<a href="archive/20260215_0338.html">20260215_0338</a>
+<a href="archive/20260213_0401.html">20260213_0401</a>
+<a href="archive/20260212_0404.html">20260212_0404</a>
+<a href="archive/20260210_0409.html">20260210_0409</a>
+<a href="archive/20260208_0339.html">20260208_0339</a>
+<a href="archive/20260207_0349.html">20260207_0349</a>
+<a href="archive/20260206_0347.html">20260206_0347</a>
+<a href="archive/20260205_0346.html">20260205_0346</a>
+<a href="archive/20260204_0354.html">20260204_0354</a>
+<a href="archive/20260202_0337.html">20260202_0337</a>
+<a href="archive/20260201_0333.html">20260201_0333</a>
+<a href="archive/20260131_0345.html">20260131_0345</a>
+<a href="archive/20260130_0341.html">20260130_0341</a>
+<a href="archive/20260129_0344.html">20260129_0344</a>
+<a href="archive/20260128_0341.html">20260128_0341</a>
+<a href="archive/20260127_0338.html">20260127_0338</a>
+<a href="archive/20260126_0330.html">20260126_0330</a>
+<a href="archive/20260125_0329.html">20260125_0329</a>
+<a href="archive/20260124_0337.html">20260124_0337</a>
+<a href="archive/20260123_0337.html">20260123_0337</a>
+<a href="archive/20260122_0343.html">20260122_0343</a>
+<a href="archive/20260121_0424.html">20260121_0424</a>
+<a href="archive/20260119_0329.html">20260119_0329</a>
+<a href="archive/20260118_0327.html">20260118_0327</a>
+<a href="archive/20260117_0332.html">20260117_0332</a>
+<a href="archive/20260116_0339.html">20260116_0339</a>
+<a href="archive/20260115_0334.html">20260115_0334</a>
+<a href="archive/20260114_0333.html">20260114_0333</a>
+<a href="archive/20260113_0334.html">20260113_0334</a>
+<a href="archive/20260112_0331.html">20260112_0331</a>
+<a href="archive/20260111_0329.html">20260111_0329</a>
+<a href="archive/20260110_0333.html">20260110_0333</a>
+<a href="archive/20260109_0334.html">20260109_0334</a>
+<a href="archive/20260108_0335.html">20260108_0335</a>
+<a href="archive/20260107_0330.html">20260107_0330</a>
+<a href="archive/20260106_0336.html">20260106_0336</a>
+<a href="archive/20260105_0328.html">20260105_0328</a>
+<a href="archive/20260104_0328.html">20260104_0328</a>
+<a href="archive/20260103_0325.html">20260103_0325</a>
+<a href="archive/20260102_0339.html">20260102_0339</a>
+<a href="archive/20260101_0329.html">20260101_0329</a>
+<a href="archive/20251231_0333.html">20251231_0333</a>
+<a href="archive/20251230_0332.html">20251230_0332</a>
+<a href="archive/20251229_0329.html">20251229_0329</a>
+<a href="archive/20251228_0332.html">20251228_0332</a>
+<a href="archive/20251227_0329.html">20251227_0329</a>
+<a href="archive/20251226_0330.html">20251226_0330</a>
+<a href="archive/20251225_0329.html">20251225_0329</a>
+<a href="archive/20251224_0331.html">20251224_0331</a>
+<a href="archive/20251223_0332.html">20251223_0332</a>
+<a href="archive/20251222_0328.html">20251222_0328</a>
+<a href="archive/20251221_0329.html">20251221_0329</a>
+<a href="archive/20251220_0330.html">20251220_0330</a>
+<a href="archive/20251219_0330.html">20251219_0330</a>
+<a href="archive/20251218_0345.html">20251218_0345</a>
+<a href="archive/20251217_0332.html">20251217_0332</a>
+<a href="archive/20251216_0333.html">20251216_0333</a>
+<a href="archive/20251215_0333.html">20251215_0333</a>
+<a href="archive/20251214_0327.html">20251214_0327</a>
+<a href="archive/20251212_0333.html">20251212_0333</a>
+<a href="archive/20251211_0331.html">20251211_0331</a>
+<a href="archive/20251210_0332.html">20251210_0332</a>
+<a href="archive/20251209_0331.html">20251209_0331</a>
+<a href="archive/20251208_0328.html">20251208_0328</a>
+<a href="archive/20251207_0327.html">20251207_0327</a>
+<a href="archive/20251206_0330.html">20251206_0330</a>
+<a href="archive/20251205_0331.html">20251205_0331</a>
+<a href="archive/20251204_0331.html">20251204_0331</a>
+<a href="archive/20251203_0333.html">20251203_0333</a>
+<a href="archive/20251202_0335.html">20251202_0335</a>
+<a href="archive/20251201_0328.html">20251201_0328</a>
+<a href="archive/20251130_0327.html">20251130_0327</a>
+<a href="archive/20251129_0328.html">20251129_0328</a>
+<a href="archive/20251128_0327.html">20251128_0327</a>
+<a href="archive/20251127_0327.html">20251127_0327</a>
+<a href="archive/20251126_0329.html">20251126_0329</a>
+<a href="archive/20251125_0327.html">20251125_0327</a>
+<a href="archive/20251124_0327.html">20251124_0327</a>
+<a href="archive/20251123_0326.html">20251123_0326</a>
+<a href="archive/20251122_0328.html">20251122_0328</a>
+<a href="archive/20251121_0328.html">20251121_0328</a>
+<a href="archive/20251120_0329.html">20251120_0329</a>
+<a href="archive/20251119_0328.html">20251119_0328</a>
+<a href="archive/20251118_0328.html">20251118_0328</a>
+<a href="archive/20251117_0326.html">20251117_0326</a>
+<a href="archive/20251116_0325.html">20251116_0325</a>
+<a href="archive/20251115_0327.html">20251115_0327</a>
+<a href="archive/20251114_0328.html">20251114_0328</a>
+<a href="archive/20251113_0330.html">20251113_0330</a>
+<a href="archive/20251112_0329.html">20251112_0329</a>
+<a href="archive/20251111_0328.html">20251111_0328</a>
+<a href="archive/20251110_0325.html">20251110_0325</a>
+<a href="archive/20251109_0326.html">20251109_0326</a>
+<a href="archive/20251108_0328.html">20251108_0328</a>
+<a href="archive/20251107_0328.html">20251107_0328</a>
+<a href="archive/20251106_0329.html">20251106_0329</a>
+<a href="archive/20251105_0326.html">20251105_0326</a>
+<a href="archive/20251104_0327.html">20251104_0327</a>
+<a href="archive/20251103_0324.html">20251103_0324</a>
+<a href="archive/20251102_0326.html">20251102_0326</a>
+<a href="archive/20251101_0324.html">20251101_0324</a>
+<a href="archive/20251031_0328.html">20251031_0328</a>
+<a href="archive/20251030_0330.html">20251030_0330</a>
+<a href="archive/20251029_0329.html">20251029_0329</a>
+<a href="archive/20251028_0329.html">20251028_0329</a>
+<a href="archive/20251027_0322.html">20251027_0322</a>
+<a href="archive/20251026_0327.html">20251026_0327</a>
+<a href="archive/20251025_0331.html">20251025_0331</a>
+<a href="archive/20251024_0329.html">20251024_0329</a>
+<a href="archive/20251023_0329.html">20251023_0329</a>
+<a href="archive/20251022_0330.html">20251022_0330</a>
+<a href="archive/20251021_0331.html">20251021_0331</a>
+<a href="archive/20251020_0328.html">20251020_0328</a>
+<a href="archive/20251019_0321.html">20251019_0321</a>
+<a href="archive/20251018_0327.html">20251018_0327</a>
+<a href="archive/20251017_0320.html">20251017_0320</a>
+<a href="archive/20251016_0328.html">20251016_0328</a>
+<a href="archive/20251015_0328.html">20251015_0328</a>
+<a href="archive/20251014_0323.html">20251014_0323</a>
+<a href="archive/20251011_0328.html">20251011_0328</a>
+<a href="archive/20251010_0330.html">20251010_0330</a>
+<a href="archive/20251009_0321.html">20251009_0321</a>
+<a href="archive/20251008_0343.html">20251008_0343</a>
+<a href="archive/20251007_0353.html">20251007_0353</a>
+<a href="archive/20251006_0325.html">20251006_0325</a>
+<a href="archive/20251005_0350.html">20251005_0350</a>
+<a href="archive/20251004_0352.html">20251004_0352</a>
+<a href="archive/20251003_0352.html">20251003_0352</a>
+<a href="archive/20251002_0356.html">20251002_0356</a>
+<a href="archive/20251001_0321.html">20251001_0321</a>
+<a href="archive/20250925_0335.html">20250925_0335</a>
+<a href="archive/20250924_0350.html">20250924_0350</a>
+<a href="archive/20250923_0348.html">20250923_0348</a>
+<a href="archive/20250922_0346.html">20250922_0346</a>
+<a href="archive/20250921_0345.html">20250921_0345</a>
+<a href="archive/20250920_0342.html">20250920_0342</a>
+<a href="archive/20250919_0346.html">20250919_0346</a>
+<a href="archive/20250918_0342.html">20250918_0342</a>
+<a href="archive/20250917_0336.html">20250917_0336</a>
+<a href="archive/20250916_0333.html">20250916_0333</a>
+<a href="archive/20250915_0333.html">20250915_0333</a>
+<a href="archive/20250914_0328.html">20250914_0328</a>
+<a href="archive/20250913_0322.html">20250913_0322</a>
+<a href="archive/20250912_0335.html">20250912_0335</a>
+<a href="archive/20250911_0337.html">20250911_0337</a>
+<a href="archive/20250910_0338.html">20250910_0338</a>
+<a href="archive/20250909_0341.html">20250909_0341</a>
+<a href="archive/20250908_0342.html">20250908_0342</a>
+<a href="archive/20250907_0333.html">20250907_0333</a>
+<a href="archive/20250906_0350.html">20250906_0350</a>
+<a href="archive/20250905_0319.html">20250905_0319</a>
+<a href="archive/20250904_0323.html">20250904_0323</a>
+<a href="archive/20250903_0355.html">20250903_0355</a>
+<a href="archive/20250902_0325.html">20250902_0325</a>
+<a href="archive/20250901_0355.html">20250901_0355</a>
+<a href="archive/20250831_0355.html">20250831_0355</a>
+<a href="archive/20250830_0356.html">20250830_0356</a>
+<a href="archive/20250829_0355.html">20250829_0355</a>
+<a href="archive/20250828_0333.html">20250828_0333</a>
+<a href="archive/20250827_1654.html">20250827_1654</a>
+<a href="archive/20250827_1602.html">20250827_1602</a>
+<a href="archive/20250827_1557.html">20250827_1557</a>
+<a href="archive/20250827_0320.html">20250827_0320</a>
+<a href="archive/20250826_0320.html">20250826_0320</a>
+<a href="archive/20250825_1752.html">20250825_1752</a>
+<a href="archive/20250825_1709.html">20250825_1709</a>
+<a href="archive/20250825_1652.html">20250825_1652</a>
+<a href="archive/20250825_1647.html">20250825_1647</a>
+<a href="archive/20250825_1645.html">20250825_1645</a>
+<a href="archive/20250825_1631.html">20250825_1631</a>
+<a href="archive/20250825_1606.html">20250825_1606</a>
+<a href="archive/20250825_1559.html">20250825_1559</a>
+<a href="archive/20250825_1558.html">20250825_1558</a>
+<a href="archive/20250825_1556.html">20250825_1556</a>
+<a href="archive/20250825_1531.html">20250825_1531</a>
+<a href="archive/20250825_1525.html">20250825_1525</a>
+<a href="archive/20250825_1516.html">20250825_1516</a>
+<a href="archive/20250825_1450.html">20250825_1450</a>
+<a href="archive/20250825_1444.html">20250825_1444</a>
+<a href="archive/20250825_1438.html">20250825_1438</a>
+<a href="archive/20250825_1414.html">20250825_1414</a>
+<a href="archive/20250825_1413.html">20250825_1413</a>
+<a href="archive/20250825_1410.html">20250825_1410</a>
+<a href="archive/20250825_1408.html">20250825_1408</a>
+<a href="archive/20250825_1405.html">20250825_1405</a>
+<a href="archive/20250825_1401.html">20250825_1401</a>
+<a href="archive/20250825_1355.html">20250825_1355</a>
+<a href="archive/20250825_1347.html">20250825_1347</a>
+<a href="archive/20250825_1345.html">20250825_1345</a>
+<a href="archive/20250825_1344.html">20250825_1344</a>
+<a href="archive/20250825_1343.html">20250825_1343</a>
+<a href="archive/20250825_1340.html">20250825_1340</a>
+<a href="archive/20250825_1339.html">20250825_1339</a>
+<a href="archive/20250825_1333.html">20250825_1333</a>
+<a href="archive/20250825_1323.html">20250825_1323</a>
+<a href="archive/20250825_1317.html">20250825_1317</a>
+<a href="archive/20250825_1243.html">20250825_1243</a>
+<a href="archive/20250824_0342.html">20250824_0342</a>
+<a href="archive/20250823_0343.html">20250823_0343</a>
+<a href="archive/20250823_0142.html">20250823_0142</a>
+<a href="archive/20250822_2331.html">20250822_2331</a>
+<a href="archive/20250822_2308.html">20250822_2308</a>
+<a href="archive/20250822_2258.html">20250822_2258</a>
+<a href="archive/20250822_2241.html">20250822_2241</a>
+<a href="archive/20250822_2228.html">20250822_2228</a>
+<a href="archive/20250822_2206.html">20250822_2206</a>
+<a href="archive/20250822_2147.html">20250822_2147</a>
+<a href="archive/20250822_2111.html">20250822_2111</a>
+<a href="archive/20250822_1259.html">20250822_1259</a>
+<a href="archive/20250822_1233.html">20250822_1233</a>
+<a href="archive/20250822_1229.html">20250822_1229</a>
+<a href="archive/20250822_1223.html">20250822_1223</a>
+<a href="archive/20250822_1210.html">20250822_1210</a>
+<a href="archive/20250822_1201.html">20250822_1201</a>
+<a href="archive/20250822_1111.html">20250822_1111</a>
+<a href="archive/20250822_1058.html">20250822_1058</a>
+<a href="archive/20250822_1052.html">20250822_1052</a>
+<a href="archive/20250822_1045.html">20250822_1045</a>
+<a href="archive/20250822_0657.html">20250822_0657</a>
+<a href="archive/20250822_0553.html">20250822_0553</a></div>
+    </details>
+    <div class="footer">Generated by arxiv-tracker</div>
+  </div>
+</body></html>
